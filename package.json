@@ -1,9 +1,13 @@
 {
   "name": "sysco_api",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "express": "^4.15.2",
+    "express-jwt": "^5.1.0",
     "jsonwebtoken": "^7.3.0",
-    "mongoose": "^4.9.3"
+    "mongoose": "^4.9.3",
+    "morgan": "^1.8.1"
   }
 }

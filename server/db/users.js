@@ -22,16 +22,16 @@ var userSchema = new mongoose.Schema({
     
 });
 
-userSchema.methods.setPassword = function(){
+userSchema.methods.setPassword = function(password){
     
     this.salt = crypto.randomBytes(16).toString("hex");
-    this.hash = crypto.pbkdf2Sync(password, this.salt);
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString("hex");
     
 }
 
 userSchema.methods.validatePassword = function(password){
     
-    return this.hash === crypto.pbkdf2Sync(password, this.salt);
+    return this.hash === crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString("hex");
     
 }
 
@@ -48,8 +48,4 @@ userSchema.methods.generateJwt = function(){
     
 }
 
-exports.userSchema = userSchema;
-return mongoose.model("users", userSchema);
-console.log(
-    
-);
+module.exports = userSchema;
