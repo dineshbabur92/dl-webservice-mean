@@ -3,11 +3,9 @@ var passport = require("passport");
 
 exports.login = function(req, res){
     
-    passport.authenticate("local", function(err, user){
+    passport.authenticate("local", function(err, user, info){
         
         if(err){
-            
-//            console.log("db authentication error: " err);
             
             res.status(404).json({
                 
@@ -30,22 +28,16 @@ exports.login = function(req, res){
         }
         else{
             
-            res.status(401).json({
-                
-                message: "User not found, please register"
-                
-            });
+            res.status(401).json(info);
             return;
             
         }
             
     })(req, res);
-    
 }
 
 exports.register = function(req, res){
     
-    console.log(req.body);
     var user = new User();
     
     user.name = req.body.name;

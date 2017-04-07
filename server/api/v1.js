@@ -10,9 +10,13 @@ process.env.JWT_SECRET = "some secret";
 
 var auth = jwt({
         
-        secret: process.env.JWT_SECRET,
-        property: "payload"
-    
+    secret: process.env.JWT_SECRET,
+    userProperty: "payload",
+    getToken: function(req){
+        return req.get("payload");
+    }
+
+
 });
 
 router.post("/register", authCtrl.register);
